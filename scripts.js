@@ -15,10 +15,12 @@ function popUpForm() {
         let title = document.createElement("input");
         title.setAttribute("type", "text");
         title.setAttribute("id", "title")
+        title.setAttribute("placeholder", "Title")
         input.appendChild(title);
         let author = document.createElement("input");
         author.setAttribute("type", "text");
         author.setAttribute("id", "author")
+        author.setAttribute("placeholder", "Author")
         input.appendChild(author);
         let read = document.createElement("input");
         read.setAttribute("type", "checkbox");
