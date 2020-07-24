@@ -1,5 +1,11 @@
 let myLibrary = [];
+
+// Select elements on the page
 const lib = document.getElementById("lib");
+const ttl = document.getElementById("title");
+const ath = document.getElementById("author");
+const rd = document.getElementById("read");
+const add = document.getElementById("add");
 
 // Construct book
 function Book(title, author, read) {
@@ -16,5 +22,5 @@ function addBookToLibrary(title, author, read) {
 
 // Append elements to show all books on the page
 function render(array) {
-
+    
 }
