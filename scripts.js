@@ -73,11 +73,16 @@ function addBookToLibrary(title, author, read) {
     if (title == "" || author == "") {
         alert("Please enter a title and an author!");
     } else {
-        myLibrary.push(new Book(title, author, read));
+        myLibrary.insert(0, new Book(title, author, read));
         deleteForm();
         render(myLibrary);
     }
 }
+
+// Insert item into array at a certain index
+Array.prototype.insert = function (index, item) {
+    this.splice(index, 0, item);
+};
 
 // Append elements to show all books on the page
 // and add a button to delete the book
@@ -86,7 +91,7 @@ function render(array) {
     array.forEach(book => {
         let tableRow = lib.insertRow();
         tableRow.insertCell(0).innerHTML = book.title;
-        tableRow.insertCell(1).innerHTML = book.author;
+        tableRow.insertCell(1).innerHTML = "by " + book.author;
         if (book.read == true) {
             tableRow.insertCell(2).innerHTML = "Read";
         } else {
