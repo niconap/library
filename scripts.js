@@ -86,11 +86,13 @@ Array.prototype.insert = function (index, item) {
 // and add a button to delete the book
 function render(array) {
     lib.innerHTML = "";
-    let topRow = lib.insertRow();
-    topRow.insertCell(0).innerHTML = "Title";
-    topRow.insertCell(1).innerHTML = "Author";
-    topRow.insertCell(2).innerHTML = "Read?";
-    topRow.setAttribute("id", "toprow");
+    if (array.length != 0) {
+        let topRow = lib.insertRow();
+        let topCell1 = topRow.insertCell(0).innerHTML = "Title";
+        let topCell2 = topRow.insertCell(1).innerHTML = "Author";
+        let topCell3 = topRow.insertCell(2).innerHTML = "Read?";
+        topRow.setAttribute("id", "toprow");
+    }
     array.forEach(book => {
         let tableRow1 = lib.insertRow();
         tableRow1.insertCell(0).innerHTML = book.title;
