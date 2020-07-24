@@ -104,3 +104,9 @@ tr {
     opacity: 100%;
     cursor: pointer;
 }
+
+#alert {
+    display: list-item;
+    align-items: center;
+    color: red;
+}

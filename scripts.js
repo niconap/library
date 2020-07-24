@@ -50,16 +50,8 @@ function popUpForm() {
 
 // Delete the form
 function deleteForm () {
-    let title = document.getElementById("title");
-    title.parentNode.removeChild(title);
-    let author = document.getElementById("author");
-    author.parentNode.removeChild(author);
-    let read = document.getElementById("read");
-    read.parentNode.removeChild(read);
-    let add = document.getElementById("add");
-    add.parentNode.removeChild(add);
-    let par = document.getElementById("par");
-    par.parentNode.removeChild(par);
+    let input = document.getElementById("input");
+    input.textContent = "";
     form = false;
 }
 
@@ -73,7 +65,11 @@ function Book(title, author, read) {
 // Make a new book and render on the page
 function addBookToLibrary(title, author, read) {
     if (title == "" || author == "") {
-        alert("Please enter a title and an author!");
+        let alert = document.createElement("paragraph");
+        alert.setAttribute("id", "alert");
+        alert.innerHTML = "Please enter a title and an author!";
+        let input = document.getElementById("input");
+        input.appendChild(alert);
     } else {
         myLibrary.insert(0, new Book(title, author, read));
         deleteForm();
