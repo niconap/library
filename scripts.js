@@ -45,6 +45,12 @@ function render(array) {
         let cell3 = tableRow.insertCell(3);
         let button = document.createElement("button");
         button.innerHTML = "Delete book";
+        button.setAttribute("data-id", array.indexOf(book));
+        button.addEventListener('click', function() {
+            let id = button.getAttribute("data-id");
+            myLibrary.splice(id, 1);
+            render(myLibrary);
+        });
         cell3.appendChild(button);
     })
 }
