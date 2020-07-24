@@ -19,11 +19,32 @@ function Book(title, author, read) {
 
 // Make a new book and render on the page
 function addBookToLibrary() {
-    myLibrary.push(new Book(ttl.textContent, ath.textContent, rd.checked));
-    render(myLibrary);
+    myLibrary.push(new Book(ttl.value, ath.value, rd.checked));
+    if (ttl.value == "" || ath.value == "") {
+        alert("Please enter a title and an author!");
+    } else {
+        ttl.value = "";
+        ath.value = "";
+        rd.checked = false;
+        render(myLibrary);
+    }
 }
 
 // Append elements to show all books on the page
 function render(array) {
-    
+    lib.innerHTML = "";
+    array.forEach(book => {
+        let tableRow = lib.insertRow();
+        tableRow.insertCell(0).innerHTML = book.title;
+        tableRow.insertCell(1).innerHTML = book.author;
+        if (book.read == true) {
+            tableRow.insertCell(2).innerHTML = "Read";
+        } else {
+            tableRow.insertCell(2).innerHTML = "Not read";
+        }
+        let cell3 = tableRow.insertCell(3);
+        let button = document.createElement("button");
+        button.innerHTML = "Delete book";
+        cell3.appendChild(button);
+    })
 }
