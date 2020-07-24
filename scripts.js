@@ -96,7 +96,7 @@ function render(array) {
     array.forEach(book => {
         let tableRow1 = lib.insertRow();
         tableRow1.insertCell(0).innerHTML = book.title;
-        tableRow1.insertCell(1).innerHTML = "by " + book.author;
+        tableRow1.insertCell(1).innerHTML = book.author;
         if (book.read == true) {
             tableRow1.insertCell(2).innerHTML = "Yes";
         } else {
@@ -104,6 +104,7 @@ function render(array) {
         }
         let tableRow2 = lib.insertRow();
         let cell3 = tableRow2.insertCell(0);
+            let cell4 = tableRow2.insertCell(1);
         let button = document.createElement("button");
         button.innerHTML = "Delete book";
         button.setAttribute("data-id", array.indexOf(book));
@@ -112,8 +113,11 @@ function render(array) {
             myLibrary.splice(id, 1);
             render(myLibrary);
         });
-        cell3.appendChild(button);
-        let cell4 = tableRow2.insertCell(1);
+        if (book.read == false) {
+            cell3.appendChild(button);
+        } else {
+            cell4.appendChild(button);
+        }
         let cell5 = tableRow2.insertCell(2);
         let readButton = document.createElement("button");
         readButton.innerHTML = "Mark as read";
