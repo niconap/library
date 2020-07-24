@@ -87,4 +87,20 @@ tr {
 #addbook {
     margin: 10px;
     font-size: 20px;
+    margin-bottom: 30px;
+}
+
+#githubicon {
+    opacity: 50%;
+    height: 30px;
+    width: 30px;
+    margin-left: 30px;
+    align-items: center;
+    bottom: 20px;
+    position: absolute;
+}
+
+#githubicon:hover {
+    opacity: 100%;
+    cursor: pointer;
 }
