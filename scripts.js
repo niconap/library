@@ -4,7 +4,6 @@ let form = false;
 // Select elements on the page
 const addbook = document.getElementById("addbook");
 
-
 // Add eventlistener to the button
 addbook.addEventListener("click", popUpForm);
 // add.addEventListener("click", addBookToLibrary);
@@ -24,10 +23,10 @@ function popUpForm() {
         let read = document.createElement("input");
         read.setAttribute("type", "checkbox");
         read.setAttribute("id", "read")
-        read.innerHTML = "Read?";
         input.appendChild(read);
         let par = document.createElement("p");
         par.innerHTML = "Read?";
+        par.setAttribute("id", "par");
         input.appendChild(par);
         let add = document.createElement("button");
         add.setAttribute("id", "add")
@@ -57,6 +56,8 @@ function deleteForm () {
     read.parentNode.removeChild(read);
     let add = document.getElementById("add");
     add.parentNode.removeChild(add);
+    let par = document.getElementById("par");
+    par.parentNode.removeChild(par);
     form = false;
 }
 
@@ -69,10 +70,10 @@ function Book(title, author, read) {
 
 // Make a new book and render on the page
 function addBookToLibrary(title, author, read) {
-    myLibrary.push(new Book(title, author, read));
     if (title == "" || author == "") {
         alert("Please enter a title and an author!");
     } else {
+        myLibrary.push(new Book(title, author, read));
         deleteForm();
         render(myLibrary);
     }
@@ -101,5 +102,17 @@ function render(array) {
             render(myLibrary);
         });
         cell3.appendChild(button);
+        let cell4 = tableRow.insertCell(4);
+        let readButton = document.createElement("button");
+        readButton.innerHTML = "Read book";
+        readButton.setAttribute("data-id", array.indexOf(book));
+        readButton.addEventListener('click', function() {
+            let id = readButton.getAttribute("data-id");
+            array[id].read = true;
+            render(myLibrary);
+        });
+        if (book.read == false) {
+            cell4.appendChild(readButton);
+        }
     })
 }
