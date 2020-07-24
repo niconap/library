@@ -7,6 +7,9 @@ const ath = document.getElementById("author");
 const rd = document.getElementById("read");
 const add = document.getElementById("add");
 
+// Add eventlistener to the button
+add.addEventListener("click", addBookToLibrary);
+
 // Construct book
 function Book(title, author, read) {
     this.title = title;
@@ -15,8 +18,8 @@ function Book(title, author, read) {
 }
 
 // Make a new book and render on the page
-function addBookToLibrary(title, author, read) {
-    myLibrary.push(new Book(title, author, read));
+function addBookToLibrary() {
+    myLibrary.push(new Book(ttl.textContent, ath.textContent, rd.checked));
     render(myLibrary);
 }
 
