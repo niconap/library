@@ -9,19 +9,19 @@
 h1 {
     margin-top: 70px;
     background-color: lightblue;
-    width: 200px;
+    width: 150px;
     padding: 20px;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 50px;
     box-shadow: 0px 0px 40px 0px rgba(171,171,171,0.5);
     margin-bottom: 35px;
-    font-size: 50px;
+    font-size: 30px;
 }
 
 button {
     border: none;
-    border-radius: 5px;
+    border-radius: 50px;
     padding: 15px;
     margin-top: 10px;
     margin-right: 5px;
@@ -33,6 +33,7 @@ button {
 
 button:hover {
     cursor: pointer;
+    background-color: #00bbd1;
     box-shadow: 0px 0px 10px 0px rgba(171,171,171,0.5);
 }
 
@@ -70,7 +71,6 @@ tr {
 
 #toprow {
     text-decoration: underline;
-    font-size: 20px;
 }
 
 
@@ -88,7 +88,6 @@ tr {
 
 #addbook {
     margin: 10px;
-    font-size: 20px;
     margin-bottom: 30px;
 }
 
