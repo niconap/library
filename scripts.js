@@ -13,24 +13,29 @@ function popUpForm() {
     if (form == false){
         let input = document.getElementById("input")
         let title = document.createElement("input");
+        title.classList.add("fade-in");
         title.setAttribute("type", "text");
         title.setAttribute("id", "title")
         title.setAttribute("placeholder", "Title")
         input.appendChild(title);
         let author = document.createElement("input");
+        author.classList.add("fade-in");
         author.setAttribute("type", "text");
         author.setAttribute("id", "author")
         author.setAttribute("placeholder", "Author")
         input.appendChild(author);
         let read = document.createElement("input");
+        read.classList.add("fade-in");
         read.setAttribute("type", "checkbox");
         read.setAttribute("id", "read")
         input.appendChild(read);
         let par = document.createElement("p");
+        par.classList.add("fade-in");
         par.innerHTML = "Read?";
         par.setAttribute("id", "par");
         input.appendChild(par);
         let add = document.createElement("button");
+        add.classList.add("fade-in");
         add.setAttribute("id", "add")
         add.innerHTML = "Add"
         input.appendChild(add);
@@ -88,6 +93,7 @@ function render(array) {
     lib.innerHTML = "";
     if (array.length != 0) {
         let topRow = lib.insertRow();
+        topRow.classList.add("fade-in");
         let topCell1 = topRow.insertCell(0).innerHTML = "Title";
         let topCell2 = topRow.insertCell(1).innerHTML = "Author";
         let topCell3 = topRow.insertCell(2).innerHTML = "Read?";
@@ -95,6 +101,7 @@ function render(array) {
     }
     array.forEach(book => {
         let tableRow1 = lib.insertRow();
+        tableRow1.classList.add("fade-in");
         tableRow1.insertCell(0).innerHTML = book.title;
         tableRow1.insertCell(1).innerHTML = book.author;
         if (book.read == true) {
@@ -113,6 +120,7 @@ function render(array) {
             myLibrary.splice(id, 1);
             render(myLibrary);
         });
+        button.classList.add("fade-in");
         if (book.read == false) {
             cell3.appendChild(button);
         } else {
@@ -120,6 +128,7 @@ function render(array) {
         }
         let cell5 = tableRow2.insertCell(2);
         let readButton = document.createElement("button");
+        readButton.classList.add("fade-in");
         readButton.innerHTML = "Mark as read";
         readButton.setAttribute("data-id", array.indexOf(book));
         readButton.addEventListener('click', function() {

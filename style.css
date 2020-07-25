@@ -56,6 +56,10 @@ td {
     text-align: center;
 }
 
+tr {
+    margin: 10px;
+}
+
 #title {
     width: 150px;
     height: 40px;
@@ -69,9 +73,6 @@ td {
     font-size: 20px;
 }
 
-tr {
-    margin: 10px;
-}
 
 #author {
     width: 150px;
@@ -98,7 +99,7 @@ tr {
     margin-left: 30px;
     align-items: center;
     bottom: 20px;
-    position: absolute;
+    position: fixed;
 }
 
 #githubicon:hover {
@@ -111,3 +112,36 @@ tr {
     align-items: center;
     color: red;
 }
+
+/* Code  under this line adapted from: https://blog.hubspot.com/website/css-fade-in */
+.fade-in {
+    animation: fadeIn ease 1s;
+    -webkit-animation: fadeIn ease 1s;
+    -moz-animation: fadeIn ease 1s;
+    -o-animation: fadeIn ease 1s;
+    -ms-animation: fadeIn ease 1s;
+    }
+    @keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
+    
+    @-moz-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
+    
+    @-webkit-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
+    
+    @-o-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
+    
+    @-ms-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
