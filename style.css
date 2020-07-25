@@ -29,6 +29,7 @@ button {
     background-color: lightblue;
     color: white;
     font-weight: bold;
+    outline: none;
 }
 
 button:hover {
@@ -39,10 +40,12 @@ button:hover {
 
 button:active {
     background-color: lightgray;
+    box-shadow: none;
 }
 
 input {
     margin: 10px;
+    outline: none;
 }
 
 p {
