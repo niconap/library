@@ -1,5 +1,6 @@
 let myLibrary = [];
 let form = false;
+let alertActive = false;
 
 // Select elements on the page
 const addbook = document.getElementById("addbook");
@@ -70,14 +71,18 @@ function Book(title, author, read) {
 // Make a new book and render on the page
 function addBookToLibrary(title, author, read) {
     if (title == "" || author == "") {
-        let alert = document.createElement("paragraph");
-        alert.setAttribute("id", "alert");
-        alert.innerHTML = "Please enter a title and an author!";
-        let input = document.getElementById("input");
-        input.appendChild(alert);
+        if (alertActive == false) {
+            let alert = document.createElement("paragraph");
+            alert.setAttribute("id", "alert");
+            alert.innerHTML = "Please enter a title and an author!";
+            let input = document.getElementById("input");
+            input.appendChild(alert);
+            alertActive = true;
+        }
     } else {
         myLibrary.insert(0, new Book(title, author, read));
         deleteForm();
+        alertActive = false;
         render(myLibrary);
     }
 }
