@@ -62,10 +62,12 @@ function deleteForm () {
 }
 
 // Construct book
-function Book(title, author, read) {
-    this.title = title;
-    this.author = author;
-    this.read = read;
+class Book {
+    constructor (title, author, read) {
+        this.title = title;
+        this.author = author;
+        this.read = read;
+    }
 }
 
 // Make a new book and render on the page
