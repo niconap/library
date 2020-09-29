@@ -12,23 +12,23 @@ addbook.addEventListener("click", popUpForm);
 // Make the form pop up
 function popUpForm() {
     if (form == false){
-        let input = document.getElementById("input")
+        let input = document.getElementById("input");
         let title = document.createElement("input");
         title.classList.add("fade-in");
         title.setAttribute("type", "text");
-        title.setAttribute("id", "title")
-        title.setAttribute("placeholder", "Title")
+        title.setAttribute("id", "title");
+        title.setAttribute("placeholder", "Title");
         input.appendChild(title);
         let author = document.createElement("input");
         author.classList.add("fade-in");
         author.setAttribute("type", "text");
-        author.setAttribute("id", "author")
-        author.setAttribute("placeholder", "Author")
+        author.setAttribute("id", "author");
+        author.setAttribute("placeholder", "Author");
         input.appendChild(author);
         let read = document.createElement("input");
         read.classList.add("fade-in");
         read.setAttribute("type", "checkbox");
-        read.setAttribute("id", "read")
+        read.setAttribute("id", "read");
         input.appendChild(read);
         let par = document.createElement("p");
         par.classList.add("fade-in");
@@ -37,8 +37,8 @@ function popUpForm() {
         input.appendChild(par);
         let add = document.createElement("button");
         add.classList.add("fade-in");
-        add.setAttribute("id", "add")
-        add.innerHTML = "Add"
+        add.setAttribute("id", "add");
+        add.innerHTML = "Add";
         input.appendChild(add);
         const lib = document.getElementById("lib");
         const ttl = document.getElementById("title");
@@ -101,9 +101,9 @@ function render(array) {
     if (array.length != 0) {
         let topRow = lib.insertRow();
         topRow.classList.add("fade-in");
-        let topCell1 = topRow.insertCell(0).innerHTML = "Title";
-        let topCell2 = topRow.insertCell(1).innerHTML = "Author";
-        let topCell3 = topRow.insertCell(2).innerHTML = "Read?";
+        topRow.insertCell(0).innerHTML = "Title";
+        topRow.insertCell(1).innerHTML = "Author";
+        topRow.insertCell(2).innerHTML = "Read?";
         topRow.setAttribute("id", "toprow");
     }
     array.forEach(book => {
@@ -146,5 +146,5 @@ function render(array) {
         if (book.read == false) {
             cell5.appendChild(readButton);
         }
-    })
+    });
 }
