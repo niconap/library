@@ -7,8 +7,11 @@ This is a simple app where the user can add books to a library and keep track of
 - Click on the "Delete book" button to delete the book
 
 Skills shown in this project:
+
 - Using objects in arrays
 - Manipulating the DOM with JavaScript
 - Adding elements to the DOM using JavaScript
 - Using CSS to style a page
 - Using basic HTML to create a page
+
+View the live version by clicking (here)[https://library-75210.web.app/].
