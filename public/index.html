@@ -12,9 +12,15 @@
     <body>
         <div id="wrapper">
             <center id="container">
+                <section id="loggedOut">
+                    <button id="loginBtn">Log in</button>
+                </section> 
+                <section hidden id="loggedIn">
+                    <p id="userDetails"></p>
+                    <button id="logoutBtn">Log out</button>
+                </section>
                 <h1>Library</h1>
-                <button id="addbook">Add Book</button>
-                <div id="input"></div>
+                <section hidden="true" id="input"><input class="fade-in" type="text" id="title" placeholder="Title"><input class="fade-in" type="text" id="author" placeholder="Author"><input class="fade-in" type="checkbox" id="read"><p class="fade-in" id="par">Read?</p><button class="fade-in" id="add">Add</button></section hidden="true">
                 <table id="lib">
                 </table>
             </center>
@@ -22,13 +28,12 @@
         <a href="https://github.com/niconap/library" target="_blank">
             <img src="GitHub-Mark-64px.png" id="githubicon">
         </a>
-        <script src="scripts.js"></script>
+        <script src="scripts.js" defer></script>
         <!-- The core Firebase JS SDK is always required and must be listed first -->
-        <script src="/__/firebase/8.6.1/firebase-app.js"></script>
-
-        <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#available-libraries -->
-        <script src="/__/firebase/8.6.1/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
 
         <!-- Initialize Firebase -->
         <script src="/__/firebase/init.js"></script>   

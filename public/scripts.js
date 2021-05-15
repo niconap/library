@@ -1,92 +1,17 @@
 let myLibrary = [];
-let form = false;
-let alertActive = false;
+const loggedOut = document.getElementById('loggedOut');
+const loggedIn = document.getElementById('loggedIn');
+const loginBtn = document.getElementById('loginBtn');
+const logoutBtn = document.getElementById('logoutBtn');
+const input = document.getElementById('input');
 
-// Select elements on the page
-const addbook = document.getElementById('addbook');
+const auth = firebase.auth();
+const userDetails = document.getElementById('userDetails');
 
-// Add eventlistener to the button
-addbook.addEventListener('click', popUpForm);
+const provider = new firebase.auth.GoogleAuthProvider();
 
-// Make the form pop up
-function popUpForm() {
-  if (form == false) {
-    let input = document.getElementById('input');
-    let title = document.createElement('input');
-    title.classList.add('fade-in');
-    title.setAttribute('type', 'text');
-    title.setAttribute('id', 'title');
-    title.setAttribute('placeholder', 'Title');
-    input.appendChild(title);
-    let author = document.createElement('input');
-    author.classList.add('fade-in');
-    author.setAttribute('type', 'text');
-    author.setAttribute('id', 'author');
-    author.setAttribute('placeholder', 'Author');
-    input.appendChild(author);
-    let read = document.createElement('input');
-    read.classList.add('fade-in');
-    read.setAttribute('type', 'checkbox');
-    read.setAttribute('id', 'read');
-    input.appendChild(read);
-    let par = document.createElement('p');
-    par.classList.add('fade-in');
-    par.innerHTML = 'Read?';
-    par.setAttribute('id', 'par');
-    input.appendChild(par);
-    let add = document.createElement('button');
-    add.classList.add('fade-in');
-    add.setAttribute('id', 'add');
-    add.innerHTML = 'Add';
-    input.appendChild(add);
-    const lib = document.getElementById('lib');
-    const ttl = document.getElementById('title');
-    const ath = document.getElementById('author');
-    const rd = document.getElementById('read');
-    const ad = document.getElementById('add');
-    ad.addEventListener('click', function () {
-      addBookToLibrary(ttl.value, ath.value, rd.checked);
-    });
-    form = true;
-  } else {
-    return;
-  }
-}
-
-// Delete the form
-function deleteForm() {
-  let input = document.getElementById('input');
-  input.textContent = '';
-  form = false;
-}
-
-// Construct book
-class Book {
-  constructor(title, author, read) {
-    this.title = title;
-    this.author = author;
-    this.read = read;
-  }
-}
-
-// Make a new book and render on the page
-function addBookToLibrary(title, author, read) {
-  if (title == '' || author == '') {
-    if (alertActive == false) {
-      let alert = document.createElement('paragraph');
-      alert.setAttribute('id', 'alert');
-      alert.innerHTML = 'Please enter a title and an author!';
-      let input = document.getElementById('input');
-      input.appendChild(alert);
-      alertActive = true;
-    }
-  } else {
-    myLibrary.insert(0, new Book(title, author, read));
-    deleteForm();
-    alertActive = false;
-    render(myLibrary);
-  }
-}
+loginBtn.onclick = () => auth.signInWithPopup(provider);
+logoutBtn.onclick = () => auth.signOut();
 
 // Insert item into array at a certain index
 Array.prototype.insert = function (index, item) {
@@ -110,7 +35,7 @@ function render(array) {
     tableRow1.classList.add('fade-in');
     tableRow1.insertCell(0).innerHTML = book.title;
     tableRow1.insertCell(1).innerHTML = book.author;
-    if (book.read == true) {
+    if (book.read) {
       tableRow1.insertCell(2).innerHTML = 'Yes';
     } else {
       tableRow1.insertCell(2).innerHTML = 'No';
@@ -122,8 +47,14 @@ function render(array) {
     button.innerHTML = 'Delete book';
     button.setAttribute('data-id', array.indexOf(book));
     button.addEventListener('click', function () {
-      let id = button.getAttribute('data-id');
-      myLibrary.splice(id, 1);
+      let bookIdQuery = db
+        .collection('books')
+        .where('bookId', '==', book.bookId);
+      bookIdQuery.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.delete();
+        });
+      });
       render(myLibrary);
     });
     button.classList.add('fade-in');
@@ -138,8 +69,16 @@ function render(array) {
     readButton.innerHTML = 'Mark as read';
     readButton.setAttribute('data-id', array.indexOf(book));
     readButton.addEventListener('click', function () {
-      let id = readButton.getAttribute('data-id');
-      array[id].read = true;
+      let bookIdQuery = db
+        .collection('books')
+        .where('bookId', '==', book.bookId);
+      bookIdQuery.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.update({
+            read: true,
+          });
+        });
+      });
       render(myLibrary);
     });
     if (book.read == false) {
@@ -147,3 +86,66 @@ function render(array) {
     }
   });
 }
+
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    loggedOut.hidden = true;
+    loggedIn.hidden = false;
+    userDetails.innerHTML = `<h2>Hello ${user.displayName}!</h2>`;
+    input.hidden = false;
+  } else {
+    loggedOut.hidden = false;
+    loggedIn.hidden = true;
+    userDetails.innerHTML = '';
+    input.hidden = true;
+  }
+});
+
+const db = firebase.firestore();
+let title = document.getElementById('title');
+let author = document.getElementById('author');
+let read = document.getElementById('read');
+let add = document.getElementById('add');
+
+let booksRef;
+let unsubscribe;
+let bookId = 0;
+
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    booksRef = db.collection('books');
+    add.onclick = () => {
+      if (title.value && author.value) {
+        const { serverTimestamp } = firebase.firestore.FieldValue;
+        booksRef.add({
+          uid: user.uid,
+          bookId,
+          title: title.value,
+          author: author.value,
+          read: read.checked,
+          createdAt: serverTimestamp(),
+        });
+        bookId++;
+      }
+    };
+
+    unsubscribe = booksRef
+      .where('uid', '==', user.uid)
+      .orderBy('createdAt')
+      .onSnapshot((querySnapshot) => {
+        myLibrary = [];
+        querySnapshot.docs.forEach((doc) => {
+          let { title, author, read, bookId } = doc.data();
+          myLibrary.push({ title, author, read, bookId });
+        });
+        title.value = '';
+        author.value = '';
+        read.checked = false;
+        render(myLibrary);
+      });
+  } else {
+    unsubscribe && unsubscribe();
+    myLibrary = [];
+    render(myLibrary);
+  }
+});
