@@ -13,5 +13,6 @@ Skills shown in this project:
 - Adding elements to the DOM using JavaScript
 - Using CSS to style a page
 - Using basic HTML to create a page
+- Using Firebase as BaaS
 
 View the live version by clicking [here](https://library-75210.web.app/).
