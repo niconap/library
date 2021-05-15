@@ -14,4 +14,4 @@ Skills shown in this project:
 - Using CSS to style a page
 - Using basic HTML to create a page
 
-View the live version by clicking (here)[https://library-75210.web.app/].
+View the live version by clicking [here](https://library-75210.web.app/).
